@@ -1,39 +1,51 @@
+'use strict';
+
 document.addEventListener('DOMContentLoaded', () => {
   const form = document.getElementById('giveaway-form');
   const message = document.getElementById('form-message');
+  if (!form || !message) return;
 
-  if (!form) return;
-
-  form.addEventListener('submit', (event) => {
+  const apiBase = (window.CAMPAIGN_API_URL || '').trim().replace(/\/$/, '');
+  form.addEventListener('submit', async (event) => {
     event.preventDefault();
+    if (!form.reportValidity()) return;
 
-    const data = new FormData(form);
-    const name = (data.get('name') || '').toString().trim();
-    const email = (data.get('email') || '').toString().trim();
-    const prize = (data.get('prize') || '').toString();
-    const agreed = data.get('agree') === 'on';
-
-    if (!name || !email || !prize || !agreed) {
-      message.textContent = 'Please complete all required fields and confirm the terms.';
+    if (!apiBase || apiBase.includes('YOUR-API-HOST')) {
+      message.textContent = '応募を受け付けられません。運営者にお問い合わせください。';
       return;
     }
 
+    const data = new FormData(form);
+    const submitButton = form.querySelector('button[type="submit"]');
     const entry = {
-      id: `JA-${Date.now().toString().slice(-6)}`,
-      name,
-      email,
-      prize,
-      createdAt: new Date().toISOString()
+      name: String(data.get('name') || '').trim(),
+      email: String(data.get('email') || '').trim(),
+      phone: String(data.get('phone') || '').trim(),
+      prize: String(data.get('prize') || ''),
+      terms: data.get('terms') === 'on'
     };
 
+    submitButton.disabled = true;
+    message.textContent = '';
     try {
-      const existing = JSON.parse(localStorage.getItem('ja-fan-giveaway-entries') || '[]');
-      existing.push(entry);
-      localStorage.setItem('ja-fan-giveaway-entries', JSON.stringify(existing));
-      message.textContent = `Entry received. Your reference ID is ${entry.id}.`;
+      const response = await fetch(`${apiBase}/api/entries`, {
+        method: 'POST',
+        credentials: 'include',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Requested-With': 'XMLHttpRequest'
+        },
+        body: JSON.stringify(entry)
+      });
+      const result = await response.json().catch(() => ({}));
+      if (!response.ok) throw new Error(result.error || '応募を受け付けられませんでした。入力内容をご確認ください。');
+
+      message.textContent = `${result.message || '応募を受け付けました。'} 受付番号: ${result.id}`;
       form.reset();
     } catch (error) {
-      message.textContent = 'There was a problem saving your entry locally. Please try again.';
+      message.textContent = error.message || '通信に失敗しました。時間をおいて再度お試しください。';
+    } finally {
+      submitButton.disabled = false;
     }
   });
 });
