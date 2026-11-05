@@ -1,39 +1,21 @@
 <!doctype html>
 <html lang="ja">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#121714">
-  <meta name="robots" content="noindex, nofollow">
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#121714"><meta name="robots" content="noindex, nofollow">
   <title>Campaign Admin — DRIVE YOUR DREAM</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="admin.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="styles.css"><link rel="stylesheet" href="admin.css">
 </head>
 <body class="admin-body">
-  <aside class="admin-sidebar">
-    <a class="brand admin-brand" href="index.html"><span class="brand-mark">D</span><span>DRIVE<span class="brand-light"> YOUR DREAM</span><small>CAMPAIGN ADMIN</small></span></a>
-    <div class="sidebar-label">WORKSPACE</div>
-    <a class="sidebar-link active" href="#overview"><span>▦</span> ダッシュボード</a>
-    <a class="sidebar-link" href="#applications"><span>☷</span> 応募一覧 <b id="total-badge">0</b></a>
-    <div class="sidebar-foot"><span class="status-indicator"></span><span>LIVE MODE<small>ローカル保存</small></span></div>
-  </aside>
+  <aside class="admin-sidebar"><a class="brand admin-brand" href="index.html"><span class="brand-mark">D</span><span>DRIVE<span class="brand-light"> YOUR DREAM</span><small>CAMPAIGN ADMIN</small></span></a><div class="sidebar-label">WORKSPACE</div><a class="sidebar-link active" href="#overview"><span>▦</span> ダッシュボード</a><a class="sidebar-link" href="#applications"><span>☷</span> 応募一覧 <b id="total-badge">0</b></a><div class="sidebar-foot"><span class="status-indicator"></span><span>SECURE SESSION<small>認証済み管理セッション</small></span></div></aside>
   <main class="admin-main" id="overview">
     <header class="admin-topbar"><div><p class="admin-overline">CAMPAIGN MANAGEMENT</p><h1>ダッシュボード</h1></div><a class="back-link" href="index.html">← キャンペーンサイトへ</a></header>
-    <section class="admin-stats" aria-label="集計">
-      <article class="stat-card"><span>応募総数</span><strong id="total-entries">0</strong><small>合計</small></article>
-      <article class="stat-card"><span>確認中</span><strong id="pending-entries">0</strong><small>ステータス</small></article>
-      <article class="stat-card"><span>当選</span><strong id="selected-entries">0</strong><small>ステータス</small></article>
-      <article class="stat-card"><span>対象外</span><strong id="rejected-entries">0</strong><small>ステータス</small></article>
-    </section>
-    <section class="admin-panel" id="applications">
-      <div class="panel-heading"><div><p class="admin-overline">ENTRIES</p><h2>応募一覧</h2></div><div class="table-tools"><label class="search-box"><span>⌕</span><input id="entry-search" type="search" placeholder="応募IDを検索" aria-label="応募IDを検索"></label><select id="status-filter" aria-label="ステータスで絞り込む"><option value="all">すべてのステータス</option><option value="確認中">確認中</option><option value="当選">当選</option><option value="対象外">対象外</option></select></div></div>
-      <div class="table-scroll"><table><thead><tr><th>応募ID</th><th>応募者名</th><th>メールアドレス</th><th>希望賞品</th><th>ステータス</th></tr></thead><tbody id="entries-body"></tbody></table></div>
-      <p class="empty-state" id="empty-state" hidden>該当する応募はありません。</p>
-    </section>
+    <section class="admin-login" id="admin-login-panel"><h2>管理者ログイン</h2><p>管理者アカウントでログインしてください。</p><form id="admin-login-form"><label>ユーザー名<input name="username" autocomplete="username" required maxlength="100"></label><label>パスワード<input name="password" type="password" autocomplete="current-password" required maxlength="200"></label><button class="button button-lime" type="submit">ログイン <span>↗</span></button><p id="login-message" role="alert"></p></form></section>
+    <section id="admin-dashboard" hidden><div class="admin-toolbar"><div></div><button id="admin-logout" class="logout-button" type="button">ログアウト</button></div><section class="admin-stats" aria-label="応募集計"><article class="stat-card"><span>応募総数</span><strong id="total-entries">0</strong><small>合計</small></article><article class="stat-card"><span>確認中</span><strong id="pending-entries">0</strong><small>ステータス</small></article><article class="stat-card"><span>当選</span><strong id="selected-entries">0</strong><small>ステータス</small></article><article class="stat-card"><span>対象外</span><strong id="rejected-entries">0</strong><small>ステータス</small></article></section>
+    <section class="admin-panel" id="applications"><div class="panel-heading"><div><p class="admin-overline">ENTRIES</p><h2>応募一覧</h2></div><div class="table-tools"><label class="search-box"><span>⌕</span><input id="entry-search" type="search" placeholder="応募者・応募IDを検索" aria-label="応募を検索"></label><select id="status-filter" aria-label="ステータスで絞り込む"><option value="all">すべてのステータス</option><option value="確認中">確認中</option><option value="当選">当選</option><option value="対象外">対象外</option></select></div></div><div class="table-scroll"><table><thead><tr><th>応募ID</th><th>応募者名</th><th>メールアドレス</th><th>希望賞品</th><th>ステータス</th></tr></thead><tbody id="entries-body"></tbody></table></div><p class="empty-state" id="empty-state" hidden>該当する応募はありません。</p></section></section>
     <footer class="admin-footer">DRIVE YOUR DREAM <span>CAMPAIGN ADMIN</span></footer>
   </main>
-  <script src="admin.js"></script>
+  <script src="config.js"></script><script src="admin.js"></script>
 </body>
 </html>
