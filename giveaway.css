@@ -1,0 +1,32 @@
+/* Additional content and responsive image treatment */
+.prize-photo{isolation:isolate}
+.prize-photo img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .65s cubic-bezier(.2,.7,.2,1)}
+.prize-card:hover .prize-photo img{transform:scale(1.045)}
+.prize-photo:after{z-index:0;pointer-events:none}
+.prize-tag,.prize-number{z-index:1}
+.voices{background:#ecefe9}
+.voice-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}
+.voice-card{position:relative;background:#f8f9f6;padding:28px 25px 24px;min-height:220px;border:1px solid #e1e5de}
+.voice-quote{font:500 50px/1 Georgia,serif;color:#8aa544;height:38px;display:block}
+.voice-card>p{font-size:12px;line-height:2;color:#333b33;margin:8px 0 23px}
+.voice-person{border-top:1px solid #e2e5df;padding-top:14px;display:flex;align-items:center;gap:10px}
+.voice-avatar{width:32px;height:32px;display:grid;place-items:center;border-radius:50%;background:#dce7c7;color:#526b2b;font:600 12px 'DM Sans',sans-serif}
+.voice-person strong,.voice-person small{display:block;font-size:9px;line-height:1.6}
+.voice-person small{color:#7d857b}
+.register{display:grid;grid-template-columns:.9fr 1.1fr;gap:8%;background:#fff}
+.register-intro h2{font-size:clamp(30px,4vw,45px)}
+.register-intro>p:not(.eyebrow){font-size:11px;color:#687168;line-height:1.8;margin-top:22px}
+.register-intro .register-note{font-size:10px!important;color:#838b82!important;border-left:2px solid #a9c46a;padding-left:12px;margin-top:13px!important}
+.register-form{display:grid;grid-template-columns:1fr 1fr;gap:17px 14px;padding:27px;background:#f5f6f2;border:1px solid #e5e8e2}
+.form-row{display:flex;flex-direction:column;gap:8px}
+.form-row label{font-size:10px;font-weight:600}
+.form-row label span{font-size:8px;color:#73834e;margin-left:5px}
+.form-row input,.form-row select{width:100%;height:43px;border:1px solid #dce1d8;background:#fff;border-radius:0;padding:0 12px;font:400 11px var(--font);color:#202720;outline:none}
+.form-row input:focus,.form-row select:focus{border-color:#86a446;box-shadow:0 0 0 2px #86a44622}
+.form-row input::placeholder{color:#a6ada4}
+.consent{grid-column:1/-1;display:flex;align-items:flex-start;gap:9px;font-size:10px;color:#505950;line-height:1.7;margin-top:3px}
+.consent input{accent-color:#728f33;margin:1px 0 0}
+.submit-button{grid-column:1/-1;width:100%;height:48px}
+.form-message{grid-column:1/-1;margin:0;font-size:10px;line-height:1.7;color:#657b35}
+@media(max-width:720px){.voice-grid{grid-template-columns:1fr}.voice-card{min-height:0;padding:23px}.register{grid-template-columns:1fr;gap:25px}.register-form{padding:20px;gap:15px 10px}}
+@media(max-width:430px){.register-form{grid-template-columns:1fr}.form-row,.consent,.submit-button,.form-message{grid-column:1}.voice-card>p{font-size:11px}}

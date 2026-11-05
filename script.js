@@ -28,11 +28,11 @@ mainNav.querySelectorAll('a').forEach((link) => {
   });
 });
 
-let toastTimer;
-document.querySelector('[data-entry]').addEventListener('click', () => {
-  const toast = document.querySelector('.toast');
-  toast.textContent = 'このページはデモのため、実際の応募受付は行っておりません。';
-  toast.classList.add('show');
-  clearTimeout(toastTimer);
-  toastTimer = setTimeout(() => toast.classList.remove('show'), 4200);
+const registrationForm = document.querySelector('#register-form');
+registrationForm.addEventListener('submit', (event) => {
+  event.preventDefault();
+  const message = registrationForm.querySelector('.form-message');
+  if (!registrationForm.reportValidity()) return;
+  message.textContent = '入力内容を確認しました。このデモでは応募データは送信・保存されません。';
+  registrationForm.querySelector('.submit-button').textContent = 'デモ確認済み';
 });
